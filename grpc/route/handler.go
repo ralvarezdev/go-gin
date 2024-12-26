@@ -9,12 +9,11 @@ import (
 type (
 	// Handler interface
 	Handler interface {
-		NewAuthenticated(route, grpcMethod string, handler gin.HandlerFunc) (
+		New(route, grpcMethod string, handler gin.HandlerFunc) (
 			string,
 			gin.HandlerFunc,
 			gin.HandlerFunc,
 		)
-		NewUnauthenticated(route string, handler gin.HandlerFunc) (string, gin.HandlerFunc)
 	}
 
 	// DefaultHandler struct
@@ -29,11 +28,17 @@ func NewDefaultHandler(
 	authentication gojwtgrpcauth.Authentication,
 	grpcInterceptions *map[string]gojwtinterception.Interception,
 ) *DefaultHandler {
-	return &DefaultHandler{authentication: authentication, grpcInterceptions: grpcInterceptions}
+	return &DefaultHandler{
+		authentication:    authentication,
+		grpcInterceptions: grpcInterceptions,
+	}
 }
 
-// NewAuthenticated creates an authenticated endpoint
-func (d *DefaultHandler) NewAuthenticated(route, grpcMethod string, handler gin.HandlerFunc) (
+// New creates an authenticated endpoint if there is the access token or the refresh token required
+func (d *DefaultHandler) New(
+	route, grpcMethod string,
+	handler gin.HandlerFunc,
+) (
 	string,
 	gin.HandlerFunc,
 	gin.HandlerFunc,
@@ -43,13 +48,4 @@ func (d *DefaultHandler) NewAuthenticated(route, grpcMethod string, handler gin.
 		grpcMethod,
 		d.grpcInterceptions,
 	), handler
-}
-
-// NewUnauthenticated creates an unauthenticated endpoint
-func (d *DefaultHandler) NewUnauthenticated(route string, handler gin.HandlerFunc) (
-	string,
-	gin.HandlerFunc,
-) {
-	// Create the endpoint
-	return route, handler
 }
