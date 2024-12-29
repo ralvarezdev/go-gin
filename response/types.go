@@ -1,4 +1,4 @@
-package types
+package response
 
 type (
 	// ErrorResponse struct

@@ -2,12 +2,14 @@ package gin
 
 import (
 	"errors"
+	"net/http"
 )
 
 var (
-	InternalServerError = errors.New("internal server error")
-	ServiceUnavailable  = errors.New("service unavailable")
-	Unauthenticated     = errors.New("missing or invalid bearer token on authentication header")
-	Unauthorized        = errors.New("not authorized to access the resource")
-	InDevelopment       = errors.New("in development")
+	InternalServerError           = http.StatusText(http.StatusInternalServerError)
+	ServiceUnavailable            = http.StatusText(http.StatusServiceUnavailable)
+	Unauthorized                  = http.StatusText(http.StatusUnauthorized)
+	ErrInvalidAuthorizationHeader = errors.New("invalid authorization header")
+	Unauthenticated               = errors.New("missing or invalid bearer token on authentication header")
+	InDevelopment                 = errors.New("in development")
 )
