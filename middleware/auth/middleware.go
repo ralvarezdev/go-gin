@@ -14,26 +14,26 @@ import (
 
 // Middleware struct
 type Middleware struct {
-	validator    gojwtvalidator.Validator
-	errorHandler goginvalidator.ErrorHandler
+	validator        gojwtvalidator.Validator
+	validatorHandler goginvalidator.Handler
 }
 
 // NewMiddleware creates a new authentication middleware
 func NewMiddleware(
 	validator gojwtvalidator.Validator,
-	errorHandler goginvalidator.ErrorHandler,
+	validatorHandler goginvalidator.Handler,
 ) (*Middleware, error) {
-	// Check if either the validator or error handler is nil
+	// Check if either the validator or validator handler is nil
 	if validator == nil {
 		return nil, gojwtvalidator.ErrNilValidator
 	}
-	if errorHandler == nil {
-		errorHandler = goginvalidator.DefaultErrorHandler
+	if validatorHandler == nil {
+		return nil, goginvalidator.ErrNilHandler
 	}
 
 	return &Middleware{
-		validator:    validator,
-		errorHandler: errorHandler,
+		validator:        validator,
+		validatorHandler: validatorHandler,
 	}, nil
 }
 
@@ -62,7 +62,7 @@ func (m *Middleware) Authenticate(interception gojwtinterception.Interception) g
 		// Validate the token and get the validated claims
 		claims, err := m.validator.GetValidatedClaims(rawToken, interception)
 		if err != nil {
-			m.errorHandler(ctx, err)
+			m.validatorHandler.HandleError(ctx, err)
 			return
 		}
 

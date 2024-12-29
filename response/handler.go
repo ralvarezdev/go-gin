@@ -57,5 +57,5 @@ func (d *DefaultHandler) HandleErrorResponse(
 	errorCode int,
 	err error,
 ) {
-	ctx.JSON(errorCode, gin.H{"error": err.Error()})
+	ctx.JSON(errorCode, NewErrorResponse(err))
 }
