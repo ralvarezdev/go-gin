@@ -3,19 +3,20 @@ package response
 import (
 	"github.com/gin-gonic/gin"
 	goflagsmode "github.com/ralvarezdev/go-flags/mode"
+	gogin "github.com/ralvarezdev/go-gin"
+	"net/http"
 )
 
 type (
 	// Handler interface for handling the responses
 	Handler interface {
-		HandleResponse(
+		HandleSuccess(ctx *gin.Context, response *Response)
+		HandleErrorProne(
 			ctx *gin.Context,
-			successCode int,
-			response interface{},
-			errorCode int,
-			err error,
+			successResponse *Response,
+			errorResponse *Response,
 		)
-		HandleErrorResponse(ctx *gin.Context, errorCode error, err error)
+		HandleError(ctx *gin.Context, response *Response)
 	}
 
 	// DefaultHandler struct
@@ -33,29 +34,49 @@ func NewDefaultHandler(mode *goflagsmode.Flag) (*DefaultHandler, error) {
 	return &DefaultHandler{mode: mode}, nil
 }
 
-// HandleResponse handles the response
-func (d *DefaultHandler) HandleResponse(
+// HandleSuccess handles the success response
+func (d *DefaultHandler) HandleSuccess(
 	ctx *gin.Context,
-	successCode int,
-	response interface{},
-	errorCode int,
-	err error,
+	response *Response,
 ) {
-	// Check if the error is nil
-	if err == nil {
-		ctx.JSON(successCode, response)
+	if response != nil && response.Code != nil {
+		ctx.JSON(*response.Code, response.Data)
+	} else {
+		ctx.JSON(
+			http.StatusInternalServerError,
+			NewJSONErrorResponseFromString(gogin.InternalServerError),
+		)
+	}
+}
+
+// HandleErrorProne handles the response that may contain an error
+func (d *DefaultHandler) HandleErrorProne(
+	ctx *gin.Context,
+	successResponse *Response,
+	errorResponse *Response,
+) {
+	// Check if the error response is nil
+	if errorResponse != nil {
+		d.HandleError(ctx, errorResponse)
 		return
 	}
 
-	// Handle the error response
-	d.HandleErrorResponse(ctx, errorCode, err)
+	// Handle the success response
+	d.HandleSuccess(ctx, successResponse)
 }
 
-// HandleErrorResponse handles the error response
-func (d *DefaultHandler) HandleErrorResponse(
+// HandleError handles the error response
+func (d *DefaultHandler) HandleError(
 	ctx *gin.Context,
-	errorCode int,
-	err error,
+	response *Response,
 ) {
-	ctx.JSON(errorCode, NewErrorResponse(err))
+	if response != nil && response.Code != nil {
+		ctx.JSON(*response.Code, response.Data)
+	} else {
+		ctx.JSON(
+			http.StatusInternalServerError,
+			NewJSONErrorResponseFromString(gogin.InternalServerError),
+		)
+	}
+	ctx.Abort()
 }
