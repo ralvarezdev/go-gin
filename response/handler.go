@@ -3,8 +3,6 @@ package response
 import (
 	"github.com/gin-gonic/gin"
 	goflagsmode "github.com/ralvarezdev/go-flags/mode"
-	gogin "github.com/ralvarezdev/go-gin"
-	"net/http"
 )
 
 type (
@@ -42,10 +40,7 @@ func (d *DefaultHandler) HandleSuccess(
 	if response != nil && response.Code != nil {
 		ctx.JSON(*response.Code, response.Data)
 	} else {
-		ctx.JSON(
-			http.StatusInternalServerError,
-			NewJSONErrorResponseFromString(gogin.InternalServerError),
-		)
+		SendInternalServerError(ctx)
 	}
 }
 
@@ -72,11 +67,8 @@ func (d *DefaultHandler) HandleError(
 ) {
 	if response != nil && response.Code != nil {
 		ctx.JSON(*response.Code, response.Data)
+		ctx.Abort()
 	} else {
-		ctx.JSON(
-			http.StatusInternalServerError,
-			NewJSONErrorResponseFromString(gogin.InternalServerError),
-		)
+		SendInternalServerError(ctx)
 	}
-	ctx.Abort()
 }
