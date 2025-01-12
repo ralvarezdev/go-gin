@@ -76,8 +76,7 @@ func (m *Middleware) Authenticate(interception gojwtinterception.Interception) g
 			return
 		}
 
-		// Set the raw token and token claims to the context
-		gojwtginctx.SetCtxRawToken(ctx, &rawToken)
+		// Set the token claims to the context
 		gojwtginctx.SetCtxTokenClaims(ctx, claims)
 
 		// Continue
