@@ -29,7 +29,7 @@ func NewDefaultHandler(mode *goflagsmode.Flag) (*DefaultHandler, error) {
 	if mode == nil {
 		return nil, goflagsmode.ErrNilModeFlag
 	}
-	return &DefaultHandler{mode: mode}, nil
+	return &DefaultHandler{mode}, nil
 }
 
 // HandleSuccess handles the success response
@@ -37,8 +37,8 @@ func (d *DefaultHandler) HandleSuccess(
 	ctx *gin.Context,
 	response *Response,
 ) {
-	if response != nil && response.Code != nil {
-		ctx.JSON(*response.Code, response.Data)
+	if response != nil && response.code != nil {
+		ctx.JSON(*response.code, response.data)
 	} else {
 		SendInternalServerError(ctx)
 	}
@@ -65,8 +65,8 @@ func (d *DefaultHandler) HandleError(
 	ctx *gin.Context,
 	response *Response,
 ) {
-	if response != nil && response.Code != nil {
-		ctx.JSON(*response.Code, response.Data)
+	if response != nil && response.code != nil {
+		ctx.JSON(*response.code, response.data)
 		ctx.Abort()
 	} else {
 		SendInternalServerError(ctx)

@@ -3,8 +3,8 @@ package response
 type (
 	// Response struct
 	Response struct {
-		Data interface{}
-		Code *int
+		data interface{}
+		code *int
 	}
 
 	// JSONErrorResponse struct
@@ -15,22 +15,22 @@ type (
 
 // NewResponseWithCode creates a new response with a code
 func NewResponseWithCode(data interface{}, code int) *Response {
-	return &Response{Data: data, Code: &code}
+	return &Response{data: data, code: &code}
 }
 
 // NewErrorResponseWithCode creates a new error response with a code
 func NewErrorResponseWithCode(err error, code int) *Response {
-	return &Response{Data: NewJSONErrorResponse(err), Code: &code}
+	return &Response{data: NewJSONErrorResponse(err), code: &code}
 }
 
 // NewResponse creates a new response
 func NewResponse(data interface{}) *Response {
-	return &Response{Data: data}
+	return &Response{data: data}
 }
 
 // NewErrorResponse creates a new error response
 func NewErrorResponse(err error) *Response {
-	return &Response{Data: NewJSONErrorResponse(err)}
+	return &Response{data: NewJSONErrorResponse(err)}
 }
 
 // NewJSONErrorResponse creates a new error response
