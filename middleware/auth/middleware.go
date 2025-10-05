@@ -101,6 +101,9 @@ func (m Middleware) Authenticate(token gojwttoken.Token) gin.HandlerFunc {
 		// Set the token claims to the context
 		gojwtginctx.SetCtxTokenClaims(ctx, claims)
 
+		// Set the raw token to the context
+		gojwtginctx.SetCtxToken(ctx, rawToken)
+
 		// Continue
 		ctx.Next()
 	}

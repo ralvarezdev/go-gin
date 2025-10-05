@@ -73,6 +73,7 @@ github.com/ralvarezdev/go-flags v0.3.5 h1:oUq2IIf3Bg63iOKoG/8HbS6yxHq5AWnMAykZRs
 github.com/ralvarezdev/go-flags v0.3.5/go.mod h1:R3yVBYvzwqfOp26LidaiJ/zftVAnPC3pKunVpV/vosE=
 github.com/ralvarezdev/go-jwt v0.5.0 h1:ucQB3VxqVC15oHFzdF7qQvAlhBg0UI9GrKIOR0pmNRQ=
 github.com/ralvarezdev/go-jwt v0.5.0/go.mod h1:7FVJv+0SNmBegRKzLisTpNd/EWAkgQgmkuBP0dcqQk8=
+github.com/ralvarezdev/go-jwt v0.5.1/go.mod h1:7FVJv+0SNmBegRKzLisTpNd/EWAkgQgmkuBP0dcqQk8=
 github.com/ralvarezdev/go-rate-limiter v0.1.9 h1:Vch/HFIoqDWB8AhY8l/vSBU5g3DsbpfHY8f0X7o9/yc=
 github.com/ralvarezdev/go-rate-limiter v0.1.9/go.mod h1:na9aoJKktmzd55n7BzoyZz9YTcO0M4fcZ3wSXb/0X0M=
 github.com/ralvarezdev/go-strings v0.1.15 h1:K+YnBiokOPNRvtVo7f2u0SyCjAILDVAqkRd2rgnBj4U=
