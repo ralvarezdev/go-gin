@@ -6,17 +6,6 @@ import (
 )
 
 type (
-	// Handler interface for handling the responses
-	Handler interface {
-		HandleSuccess(ctx *gin.Context, response *Response)
-		HandleErrorProne(
-			ctx *gin.Context,
-			successResponse *Response,
-			errorResponse *Response,
-		)
-		HandleError(ctx *gin.Context, response *Response)
-	}
-
 	// DefaultHandler struct
 	DefaultHandler struct {
 		mode *goflagsmode.Flag
@@ -24,6 +13,15 @@ type (
 )
 
 // NewDefaultHandler creates a new default request handler
+//
+// Parameters:
+//
+//   - mode: the flag mode
+//
+// Returns:
+//
+//   - *DefaultHandler: a pointer to the DefaultHandler struct
+//   - error: an error if the mode is nil
 func NewDefaultHandler(mode *goflagsmode.Flag) (*DefaultHandler, error) {
 	// Check if the flag mode is nil
 	if mode == nil {
@@ -33,7 +31,12 @@ func NewDefaultHandler(mode *goflagsmode.Flag) (*DefaultHandler, error) {
 }
 
 // HandleSuccess handles the success response
-func (d *DefaultHandler) HandleSuccess(
+//
+// Parameters:
+//
+//   - ctx: the gin context
+//   - response: the response to be sent
+func (d DefaultHandler) HandleSuccess(
 	ctx *gin.Context,
 	response *Response,
 ) {
@@ -45,7 +48,13 @@ func (d *DefaultHandler) HandleSuccess(
 }
 
 // HandleErrorProne handles the response that may contain an error
-func (d *DefaultHandler) HandleErrorProne(
+//
+// Parameters:
+//
+//   - ctx: the gin context
+//   - successResponse: the success response
+//   - errorResponse: the error response
+func (d DefaultHandler) HandleErrorProne(
 	ctx *gin.Context,
 	successResponse *Response,
 	errorResponse *Response,
@@ -61,7 +70,12 @@ func (d *DefaultHandler) HandleErrorProne(
 }
 
 // HandleError handles the error response
-func (d *DefaultHandler) HandleError(
+//
+// Parameters:
+//
+//   - ctx: the gin context
+//   - response: the response to be sent
+func (d DefaultHandler) HandleError(
 	ctx *gin.Context,
 	response *Response,
 ) {

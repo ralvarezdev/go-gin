@@ -1,6 +1,9 @@
 package auth
 
 import (
+	"net/http"
+	"strings"
+
 	"github.com/gin-gonic/gin"
 	gogin "github.com/ralvarezdev/go-gin"
 	goginjwtvalidator "github.com/ralvarezdev/go-gin/jwt/validator"
@@ -8,20 +11,31 @@ import (
 	gojwt "github.com/ralvarezdev/go-jwt"
 	gojwtgin "github.com/ralvarezdev/go-jwt/gin"
 	gojwtginctx "github.com/ralvarezdev/go-jwt/gin/context"
-	gojwtinterception "github.com/ralvarezdev/go-jwt/token/interception"
+	gojwttoken "github.com/ralvarezdev/go-jwt/token"
 	gojwtvalidator "github.com/ralvarezdev/go-jwt/token/validator"
-	"net/http"
-	"strings"
 )
 
-// Middleware struct
-type Middleware struct {
-	validator                gojwtvalidator.Validator
-	responseHandler          goginresponse.Handler
-	jwtValidatorErrorHandler goginjwtvalidator.ErrorHandler
-}
+type (
+	// Middleware struct
+	Middleware struct {
+		validator                gojwtvalidator.Validator
+		responseHandler          goginresponse.Handler
+		jwtValidatorErrorHandler goginjwtvalidator.ErrorHandler
+	}
+)
 
 // NewMiddleware creates a new authentication middleware
+//
+// Parameters:
+//
+//   - validator: The JWT validator
+//   - responseHandler: The response handler
+//   - jwtValidatorErrorHandler: The JWT validator error handler
+//
+// Returns:
+//
+//   - *Middleware: The authentication middleware
+//   - error: An error if the validator, response handler or validator handler is nil
 func NewMiddleware(
 	validator gojwtvalidator.Validator,
 	responseHandler goginresponse.Handler,
@@ -46,7 +60,15 @@ func NewMiddleware(
 }
 
 // Authenticate return the middleware function that authenticates the request
-func (m *Middleware) Authenticate(interception gojwtinterception.Interception) gin.HandlerFunc {
+//
+// Parameters:
+//
+//   - token: The JWT token
+//
+// Returns:
+//
+//   - gin.HandlerFunc: The middleware function
+func (m Middleware) Authenticate(token gojwttoken.Token) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		// Get the authorization from the header
 		authorization := ctx.GetHeader(gojwtgin.AuthorizationHeaderKey)
@@ -70,7 +92,7 @@ func (m *Middleware) Authenticate(interception gojwtinterception.Interception) g
 		rawToken := parts[1]
 
 		// Validate the token and get the validated claims
-		claims, err := m.validator.GetValidatedClaims(rawToken, interception)
+		claims, err := m.validator.ValidateClaims(rawToken, token)
 		if err != nil {
 			m.jwtValidatorErrorHandler(ctx, err)
 			return

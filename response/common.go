@@ -1,12 +1,17 @@
 package response
 
 import (
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 	gogin "github.com/ralvarezdev/go-gin"
-	"net/http"
 )
 
 // SendInternalServerError sends an internal server error response
+//
+// Parameters:
+//
+//   - ctx: the gin context
 func SendInternalServerError(ctx *gin.Context) {
 	ctx.JSON(
 		http.StatusInternalServerError,
