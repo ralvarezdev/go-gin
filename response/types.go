@@ -54,6 +54,24 @@ func NewResponse(data interface{}) *Response {
 	return &Response{data: data}
 }
 
+// Code returns the HTTP status code
+//
+// Returns:
+//
+//   - *int: a pointer to the HTTP status code (nil if not set)
+func (r Response) Code() *int {
+	return r.code
+}
+
+// Data returns the response data
+//
+// Returns:
+//
+//   - interface{}: the response data
+func (r Response) Data() interface{} {
+	return r.data
+}
+
 // NewErrorResponse creates a new error response
 //
 // Parameters:
