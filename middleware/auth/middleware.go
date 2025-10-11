@@ -99,13 +99,8 @@ func (m Middleware) Authenticate(token gojwttoken.Token) gin.HandlerFunc {
 		}
 
 		// Set the token claims to the context
-		if token == gojwttoken.RefreshToken {
-			gojwtginctx.SetCtxRefreshTokenClaims(ctx, claims)
-			gojwtginctx.SetCtxRefreshToken(ctx, rawToken)
-		} else if token == gojwttoken.AccessToken {
-			gojwtginctx.SetCtxAccessTokenClaims(ctx, claims)
-			gojwtginctx.SetCtxAccessToken(ctx, rawToken)
-		}
+		gojwtginctx.SetCtxTokenClaims(ctx, claims)
+		gojwtginctx.SetCtxToken(ctx, rawToken)
 
 		// Continue
 		ctx.Next()

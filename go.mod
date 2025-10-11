@@ -5,7 +5,7 @@ go 1.24.0
 require (
 	github.com/gin-gonic/gin v1.11.0
 	github.com/ralvarezdev/go-flags v0.3.8
-	github.com/ralvarezdev/go-jwt v0.5.3
+	github.com/ralvarezdev/go-jwt v0.5.4
 	github.com/ralvarezdev/go-rate-limiter v0.1.9
 )
 
