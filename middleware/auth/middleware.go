@@ -5,14 +5,15 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
-	gogin "github.com/ralvarezdev/go-gin"
-	goginjwtvalidator "github.com/ralvarezdev/go-gin/jwt/validator"
-	goginresponse "github.com/ralvarezdev/go-gin/response"
 	gojwt "github.com/ralvarezdev/go-jwt"
 	gojwtgin "github.com/ralvarezdev/go-jwt/gin"
 	gojwtginctx "github.com/ralvarezdev/go-jwt/gin/context"
 	gojwttoken "github.com/ralvarezdev/go-jwt/token"
 	gojwtvalidator "github.com/ralvarezdev/go-jwt/token/validator"
+
+	gogin "github.com/ralvarezdev/go-gin"
+	goginjwtvalidator "github.com/ralvarezdev/go-gin/jwt/validator"
+	goginresponse "github.com/ralvarezdev/go-gin/response"
 )
 
 type (

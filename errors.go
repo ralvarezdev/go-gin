@@ -1,4 +1,4 @@
-package gin
+package gogin
 
 import (
 	"errors"
@@ -10,6 +10,6 @@ var (
 	ServiceUnavailable            = http.StatusText(http.StatusServiceUnavailable)
 	Unauthorized                  = http.StatusText(http.StatusUnauthorized)
 	ErrInvalidAuthorizationHeader = errors.New("invalid authorization header")
-	Unauthenticated               = errors.New("missing or invalid bearer token on authentication header")
-	InDevelopment                 = errors.New("in development")
+	ErrUnauthenticated            = errors.New("missing or invalid bearer token on authentication header")
+	ErrInDevelopment              = errors.New("in development")
 )

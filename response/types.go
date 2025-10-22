@@ -3,7 +3,7 @@ package response
 type (
 	// Response struct
 	Response struct {
-		data interface{}
+		data any
 		code *int
 	}
 
@@ -23,7 +23,7 @@ type (
 // Returns:
 //
 //   - *Response: a pointer to the Response struct
-func NewResponseWithCode(data interface{}, code int) *Response {
+func NewResponseWithCode(data any, code int) *Response {
 	return &Response{data: data, code: &code}
 }
 
@@ -50,7 +50,7 @@ func NewErrorResponseWithCode(err error, code int) *Response {
 // Returns:
 //
 //   - *Response: a pointer to the Response struct
-func NewResponse(data interface{}) *Response {
+func NewResponse(data any) *Response {
 	return &Response{data: data}
 }
 
@@ -67,8 +67,8 @@ func (r Response) Code() *int {
 //
 // Returns:
 //
-//   - interface{}: the response data
-func (r Response) Data() interface{} {
+//   - any: the response data
+func (r Response) Data() any {
 	return r.data
 }
 

@@ -6,7 +6,7 @@ require (
 	github.com/gin-gonic/gin v1.11.0
 	github.com/ralvarezdev/go-flags v0.3.8
 	github.com/ralvarezdev/go-jwt v0.5.4
-	github.com/ralvarezdev/go-rate-limiter v0.1.9
+	github.com/ralvarezdev/go-rate-limiter v0.1.11
 )
 
 require (
@@ -34,8 +34,8 @@ require (
 	github.com/pelletier/go-toml/v2 v2.2.4 // indirect
 	github.com/quic-go/qpack v0.5.1 // indirect
 	github.com/quic-go/quic-go v0.55.0 // indirect
-	github.com/ralvarezdev/go-databases v0.6.1 // indirect
-	github.com/ralvarezdev/go-strings v0.1.15 // indirect
+	github.com/ralvarezdev/go-databases v0.7.5 // indirect
+	github.com/ralvarezdev/go-strings v0.1.17 // indirect
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
 	github.com/ugorji/go/codec v1.3.0 // indirect
 	golang.org/x/arch v0.22.0 // indirect
