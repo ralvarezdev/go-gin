@@ -69,10 +69,14 @@ github.com/quic-go/quic-go v0.55.0 h1:zccPQIqYCXDt5NmcEabyYvOnomjs8Tlwl7tISjJh9M
 github.com/quic-go/quic-go v0.55.0/go.mod h1:DR51ilwU1uE164KuWXhinFcKWGlEjzys2l8zUl5Ss1U=
 github.com/ralvarezdev/go-databases v0.7.5 h1:kUW+8l75ZeBoEnNPbGAZKWmFtH5LwWNRMz8w/sAO5oM=
 github.com/ralvarezdev/go-databases v0.7.5/go.mod h1:f5HsXMi89hSenuZM88IKmfqdTv2gI1JBxizKukz/Y9A=
+github.com/ralvarezdev/go-databases v0.8.0 h1:+5syyi5fy6xoKJoTeEzdbzi/fJz1OlSpcfmu+Q4G4TU=
+github.com/ralvarezdev/go-databases v0.8.0/go.mod h1:f5HsXMi89hSenuZM88IKmfqdTv2gI1JBxizKukz/Y9A=
 github.com/ralvarezdev/go-flags v0.3.8 h1:b/doNRr2HsniEpz8NjbH2vxJH5WMeymIx0LAzDIOnOc=
 github.com/ralvarezdev/go-flags v0.3.8/go.mod h1:R3yVBYvzwqfOp26LidaiJ/zftVAnPC3pKunVpV/vosE=
 github.com/ralvarezdev/go-jwt v0.5.4 h1:IvLWvQRL6+PJJ0kHetvqV68I0Wowc7gPsVyeVApFJkk=
 github.com/ralvarezdev/go-jwt v0.5.4/go.mod h1:7FVJv+0SNmBegRKzLisTpNd/EWAkgQgmkuBP0dcqQk8=
+github.com/ralvarezdev/go-jwt v0.7.0 h1:9LFuKDZC6wuQDWNneIHkxAaFKJRmc2AOGaGYbQ2qbmg=
+github.com/ralvarezdev/go-jwt v0.7.0/go.mod h1:BCnVeeltRoh6MZ8/0Z1fgYb1YIlo8CgKWlsKjHt3zqo=
 github.com/ralvarezdev/go-rate-limiter v0.1.11 h1:4YqXf8iOuwsGi5oCAwJSHAjq7xRlbbCPiLrg2b2kJtw=
 github.com/ralvarezdev/go-rate-limiter v0.1.11/go.mod h1:TcADAW+bEUJhNtfdg9kaRYn0tp4laJrrMJcaB+zP7HY=
 github.com/ralvarezdev/go-strings v0.1.17 h1:HFFqe5fVqsYdaOsj+yoVtgIgkNXubDHSz5ubN8V6iW8=
