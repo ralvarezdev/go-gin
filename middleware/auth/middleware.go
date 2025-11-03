@@ -7,7 +7,6 @@ import (
 	"github.com/gin-gonic/gin"
 	gojwt "github.com/ralvarezdev/go-jwt"
 	gojwtgin "github.com/ralvarezdev/go-jwt/gin"
-	gojwtginctx "github.com/ralvarezdev/go-jwt/gin/context"
 	gojwttoken "github.com/ralvarezdev/go-jwt/token"
 	gojwtvalidator "github.com/ralvarezdev/go-jwt/token/validator"
 
@@ -72,7 +71,7 @@ func NewMiddleware(
 func (m Middleware) Authenticate(token gojwttoken.Token) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		// Get the authorization from the header
-		authorization := ctx.GetHeader(gojwtgin.AuthorizationHeaderKey)
+		authorization := ctx.GetHeader(gogin.AuthorizationHeaderKey)
 
 		// Check if the authorization is a bearer token
 		parts := strings.Split(authorization, " ")
@@ -93,15 +92,15 @@ func (m Middleware) Authenticate(token gojwttoken.Token) gin.HandlerFunc {
 		rawToken := parts[1]
 
 		// Validate the token and get the validated claims
-		claims, err := m.validator.ValidateClaims(rawToken, token)
+		claims, err := m.validator.ValidateClaims(ctx, rawToken, token)
 		if err != nil {
 			m.jwtValidatorErrorHandler(ctx, err)
 			return
 		}
 
 		// Set the token claims to the context
-		gojwtginctx.SetCtxTokenClaims(ctx, claims)
-		gojwtginctx.SetCtxToken(ctx, rawToken)
+		gojwtgin.SetCtxTokenClaims(ctx, claims)
+		gojwtgin.SetCtxToken(ctx, rawToken)
 
 		// Continue
 		ctx.Next()
